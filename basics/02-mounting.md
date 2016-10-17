@@ -1,8 +1,8 @@
 # Mounting :love_hotel:
 
-We have formal types for our `vNodes` methods needed to built each type of `vNode`. 
-However, the `vNodes` are just simple JavaScript objects and we cannot magically merge
-these into the native `DOM`. The browser needs actual **native** `nodes` in order to display HTML.
+`vNodes` are just plain old JavaScript objects (POJO's) and we cannot magically insert
+these into the native `DOM`. The browser needs actual **native** `nodes` to display HTML. There 
+is a problem here, and we need a solution!
 
 > The browser cannot display the Virtual DOM directly!
 
@@ -13,7 +13,7 @@ and/or `componentDidMount()`. These methods probably give you some hint what **m
 
 It is the process where the **native** DOM `nodes` are created (from `vNode`'s) and inserted in 
 the **native** DOM. 
-<br>
+
 ## DOM and vDOM relationship :heart:
 
 It is important to understand that there is a constant long-lasting relationship between the `DOM` and `vDOM`. 
