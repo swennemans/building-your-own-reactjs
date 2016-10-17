@@ -8,7 +8,7 @@ Even though React is not inheritly tied to a Virtual DOM (vDOM), React.js (curre
 The vDOM is an in-memory JavaScript representation of the (native) `DOM` tree.
 the `DOM` tree is built out of `nodes`. The `vDOM` beign a representation of the `DOM` is built out of
 `virtual nodes` (vNodes).
-This does **not** means that the `vDOM` a replacement of the `DOM`. They need to co-exist and work together :couple:.  
+This does **not** means that the `vDOM` a replacement of the `DOM`. They need to co-exist and work together :couple:
 
 ## Formal definitions 🤓
 
@@ -20,9 +20,8 @@ Which can be mapped to respectively the DOM's `HTMLElement` and `TextNode`.
 >The formal type definitions of our custom implementation differs a little bit from React’s one. The reason being that it will lead to (hopefully) some easier to understand code.
 Our vElement and vText are defined as.
 
-Without further ado I present to you:
+Without further ado I present our definitions:
 ```javascript
-
 type VNode = vElement | vText
 type VNodeList = VNode[]
 

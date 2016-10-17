@@ -114,37 +114,7 @@ const myApp = createVElement('div', 'my-class', [
 
 ```
 
-No problemo!
-
-## Our vDOM
-
-We've mostly focussed on build the DOM, let's put our focus on the vDOM. Let's expose our myApp variable globally. 
-
-```javascript
-index.js
-
-...
-
-global.myGlobalApp = myApp
-
-```
-
-In our console we can inspect our `myGlobalApp` variable, and see that it's an Object with the by us defined properties. You will see that the props object holds an array of of `vElements` that may also hold an array of `vElement`s.
+No problemo for our code! It's already building a more complex `DOM` without any problems. Awesome! But 
+what is the role of our `vDOM` currently? Curious? Me too! Let's explore it. 
 
 
-#### Manipulation
-
-Even though we're skipping some fundamentals (like actually displaying something useful in the browser). I'd like to point the focus on the `dom` property that every `vElement` holds. 
-
-
-If you inspect these elements you will find that each of this property holds an reference to an actual DOM snippet which you can manipulate. 
-
-```javascript
-myGlobalApp.dom // returns "my-class"
-
-//let's change some inline styles!
-myGlobalApp.dom.style = 'height: 100px; width: 100px; background-color: red';
-
-//DOM is updated
-```
-Pretty cool right? From our `vElement` we can access the actual relevant DOM `node` and manipulate it. This will become handy for sure!
