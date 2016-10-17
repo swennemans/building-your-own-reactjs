@@ -14,7 +14,7 @@ This does **not** means that the `vDOM` a replacement of the `DOM`. They need to
 
 In order to understand what these `vNodes` are, let's get a little formal! Don't worry it's just describing the `vNodes`. 
 
-In our React.js implementation the `vNodes` can be of either two types: virtual elements (vElement) or virtual text elements (vText). 
+In our own implementation the `vNodes` can be of either two types: virtual elements (vElement) or virtual text elements (vText). 
 Which can be mapped to respectively the DOM's `HTMLElement` and `TextNode`. 
 
 >The formal type definitions of our custom implementation differs a little bit from React’s one. The reason being that it will lead to (hopefully) some easier to understand code.
