@@ -7,4 +7,3 @@
     * [Getting started](build_basic_vdom/01-getting-started.md)
     * [Recursivly build the DOM](build_basic_vdom/02-recursively-build-dom.md)
     * [Inspecting our vDOM](build_basic_vdom/03-inspecting-our-vdom.md)
-
