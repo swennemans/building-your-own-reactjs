@@ -1,7 +1,7 @@
-#The virtual DOM
+#The virtual DOM 🕹
 
-Even though React is not inheritly tied to a Virtual DOM (vDOM), React.js (currently) is. 
- The `vDOM` is an (important) implementation detail to make React.js to work declarable, predictable and performant.
+React is not inheritly tied to it's Virtual DOM (vDOM) but React.js (currently) is. 
+ The `vDOM` is an (important) implementation detail to make React.js declarable, predictable and performant.
 
 > If you're interested in why React.js is using a vDOM I can recommend [this video](https://www.youtube.com/watch?v=-DX3vJiqxm4) of Pete Hunt.
 

@@ -42,9 +42,10 @@ The HTML equivelant would be:
   <p class="my-paragraph"></p>
 </div>
 ```
-The important thing to notice is that we now have multiple nodes and that some of these nodes are nested. 
-
-Now that we have nested `vElements` in our application, we need to **mount** these. Actually we can reuse our `mountVElement` function, because, well each child is an `vElement` that need to be mounted. We do need to adjust our `mountVElement` function a bit. 
+The important thing to notice is: we now have multiple nodes and that some of these nodes are nested. How to handle this?
+Well, the title probably already gave it away, recurse it!
+While using recursion we can reuse our `mountVElement` function, because, well each child is an `vElement` that needs to be mounted. 
+We can adjust our `mountVElement` function a bit to make it work.  
 
 ```javascript
 function mountVElement(vElement, parentDOMnode) {
@@ -58,7 +59,8 @@ function mountVElement(vElement, parentDOMnode) {
   vElement.dom = domNode;
 
   if (props.children) {
-    //Important: we pass our above created domNode!
+    //Important: we pass the parentDOMnode 
+    //again and again
      children.forEach((child) => 
       mountVElement(child, parentDOMNode)
     });
@@ -75,7 +77,10 @@ function mountVElement(vElement, parentDOMnode) {
 
 ```
 
-Even with three nodes this part can be hard to wrap your head around. There is a lot of mutating and recursing going on here. In the table below the steps are (conceptually) laid out:
+Even with three nodes this part can be hard to wrap your head around how this works. 
+There is a lot of mutating and recursing going on here. Personally I always have a hard
+time understanding this.  
+ In the table below the steps are (conceptually) laid out:
 
 | Iteration | parentDOMNode | vElement | Resulting DOM |
 | --- | --- | --- | --- |
@@ -85,14 +90,18 @@ Even with three nodes this part can be hard to wrap your head around. There is a
 
 
 
-Hopefully with the above table you can reason about how the DOM is actually built from our `vElements`. If not try to place some `debugger` statements in places that look weird to you. Or just accept the fact that mutation and looping can be hard to understand :D. 
+Hopefully with the above table you can reason about how the DOM is actually built from our `vElements`. 
+If not try to place some `debugger` statements in places that look weird to you. 
+Or just accept the fact that mutation and looping can be hard to understand :smile:. 
 
-**Warning** If you would use`console.log` statement to debug, you will find that the printed `domNode`(s) are already mutated before you can inspect them (what is an insight in itself). 
+**Warning** If you would use`console.log` statement to debug, you will find that the printed `domNode`(s) 
+are already mutated before you can inspect them (what is an insight in itself). 
 
 
 
-## Building a complex DOM
-Now we have made great progression! We this little bit of code we can create a complex DOM with nested nodes. Let's try it!
+## Building a complex DOM 🏯
+Now we have made great progression! We this little bit of code we can even create a complex DOM with nested nodes. 
+Let's try it!
 
 ```javascript
 
@@ -114,7 +123,8 @@ const myApp = createVElement('div', 'my-class', [
 
 ```
 
-No problemo for our code! It's already building a more complex `DOM` without any problems. Awesome! But 
-what is the role of our `vDOM` currently? Curious? Me too! Let's explore it. 
+No problemo for our code! We can build a deeply nested `DOM` without any problems. Awesome! 
+But  what is the role of our `vDOM` in all of this? Curious? Me too! Let's go to the next section 🛤
+
 
 

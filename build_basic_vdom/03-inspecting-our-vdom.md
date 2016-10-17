@@ -31,11 +31,12 @@ myGlobalApp.dom.style = 'height: 100px; width: 100px; background-color: red';
 
 //DOM is updated
 ```
-Try it!
 
-In some sense this is a little scary. Especially when we all heard about the great dangers of mutability. 
-But the `DOM` will do whatever it damn well pleases and we have to accept that. But on the other hand it's 
+Try it! What happens? Did you expect this?
+
+In some sense this is a little scary. We've all heard (and experienced) the great dangers of mutability. 
+But the `DOM` will do whatever it damn well pleases and we have to work with that. And we do, it's
 actual pretty cool right? Our `vDOM` holds `vNodes` that have reference to the actual specific `DOM node`. This also
 means that we can do our magic on the `vDOM` and **only** update the relevant `DOM node`. It feels as if
-we have some power again 💪
+we have reclaimed the power and made the `vDOM` boss (again) 💪
 

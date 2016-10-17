@@ -26,8 +26,8 @@ What does it mean the the `vDOM` is the boss? We can construct our `vDOM` with J
 Meaning, the `DOM` will take the shape we define in our `vDOM`. And this is something we like very much, 
 because we can use all the power that JavaScript has to offer. 
 
-## From vDOM to DOM
+## From vDOM 🕹 to DOM 📺
 
 At this stage we've already have discussed the ingredients to build a `DOM` from a `vDOM`. But
-probably this is still way too vague. Don't worry! In the next secion we will build our own `vDOM` implementation. Epic times 
-almost there :v:.
+probably this is still way too vague. Don't worry! In the next secion we will build our own `vDOM` implementation. 
+Epic times are almost here :v:.
