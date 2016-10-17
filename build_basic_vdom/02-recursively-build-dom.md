@@ -44,8 +44,10 @@ The HTML equivelant would be:
 ```
 The important thing to notice is: we now have multiple nodes and that some of these nodes are nested. How to handle this?
 Well, the title probably already gave it away, recurse it!
+
 While using recursion we can reuse our `mountVElement` function, because, well each child is an `vElement` that needs to be mounted. 
-We can adjust our `mountVElement` function a bit to make it work.  
+We just need to adjust our `mountVElement` function. We need to watch out for the `children` property, and if it exists
+we need to **mount** the content.   
 
 ```javascript
 function mountVElement(vElement, parentDOMnode) {
@@ -100,8 +102,10 @@ are already mutated before you can inspect them (what is an insight in itself).
 
 
 ## Building a complex DOM 🏯
-Now we have made great progression! We this little bit of code we can even create a complex DOM with nested nodes. 
-Let's try it!
+Now we have made great progression! We this little bit of code we can even create a complex DOM with 
+lots of nested nodes. 
+
+Let's give it a shot!
 
 ```javascript
 

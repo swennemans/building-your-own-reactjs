@@ -26,7 +26,7 @@ It is basicly a small `DOM` snippet which we can manipulate.
 ```javascript
 myGlobalApp.dom // returns "my-class"
 
-//let's change some inline styles!
+//let's try something weird:
 myGlobalApp.dom.style = 'height: 100px; width: 100px; background-color: red';
 
 //DOM is updated
@@ -39,4 +39,3 @@ But the `DOM` will do whatever it damn well pleases and we have to work with tha
 actual pretty cool right? Our `vDOM` holds `vNodes` that have reference to the actual specific `DOM node`. This also
 means that we can do our magic on the `vDOM` and **only** update the relevant `DOM node`. It feels as if
 we have reclaimed the power and made the `vDOM` boss (again) 💪
-
