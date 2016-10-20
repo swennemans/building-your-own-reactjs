@@ -27,9 +27,9 @@ The children property can be empty or a `vNodeList`. A `vNodeList` is simply an 
 Let's extend our application a with a header and a paragraph. 
 
 ```javascript
-const myApp = createVElement('div', 'my-class', [
-  createVElement('h1', 'my-header'),
-  createVElement('p', 'my-paragraph')
+const myApp = createVElement('div', { className:'my-class' }, [
+  createVElement('h1', { className:'my-header' }),
+  createVElement('p', { className: 'my-paragraph'})
 ]);
 
 ```
@@ -109,15 +109,15 @@ Let's give it a shot!
 
 ```javascript
 
-const myApp = createVElement('div', 'my-class', [
-  createVElement('h1', 'my-header'),
-  createVElement('div', 'my-container', [
-    createVElement('div', 'my-sub-container', [
-      createVElement('div', 'my-sub-sub-container', [
-        createVElement('div', 'my-sub-sub-sub-container', [
-          createVElement('div', 'my-sub-sub-sub-sub-container', [
-            createVElement('div', 'my-sub-sub-sub-sub-sub-container', []),
-            createVElement('h1', 'my-sub-sub-sub-sub-sub-header', [])
+const myApp = createVElement('div', { className: 'my-class' }, [
+  createVElement('h1', { className:'my-header' }),
+  createVElement('div', { className:'my-container' }, [
+    createVElement('div', { className:'my-sub-container' }, [
+      createVElement('div', { className:'my-sub-sub-container' }, [
+        createVElement('div', { className:'my-sub-sub-sub-container' }, [
+          createVElement('div', { className:'my-sub-sub-sub-sub-container' }, [
+            createVElement('div', { className:'my-sub-sub-sub-sub-sub-container' }, []),
+            createVElement('h1', { className:'my-sub-sub-sub-sub-sub-header' }, [])
           ])
         ])
       ])

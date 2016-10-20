@@ -1,9 +1,16 @@
 # Summary
 
-* [The Basics](basics/README.md)
+* [The Basics](01-basics/README.md)
     * [The Virtual DOM](basics/01-virtual-dom.md)
     * [Mounting](basics/02-mounting.md)
-* [Building our own Virtual DOM](build_basic_vdom/README.md)
+* [Building our own basic Virtual DOM](build_basic_vdom/README.md)
     * [Getting started](build_basic_vdom/01-getting-started.md)
-    * [Recursivly build the DOM](build_basic_vdom/02-recursively-build-dom.md)
-    * [Inspecting our vDOM](build_basic_vdom/03-inspecting-our-vdom.md)
+    * [Recursivly build the DOM](02-building_basic_vdom/02-recursively-build-dom.md)
+    * [Inspecting our vDOM](02-building_basic_vdom/03-inspecting-our-vdom.md)
+    * [Adding properties](02-building_basic_vdom/04-adding-props.md)
+    * Displaying text (coming soon)
+    * Updating/patching (coming soon)
+* React.js (coming soon)
+    *
+    *
+    *

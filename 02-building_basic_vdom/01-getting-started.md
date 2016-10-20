@@ -8,6 +8,12 @@ create a native `DOM`. Of course we can create a `vDOM` without mapping it to th
 but that would make it pretty useless. But it would be a waste of both our times to keep repeating
 this. 
 
+#### Why?
+
+React.js is pretty complex and I personally found the the whole `vDOM` implementation
+also a bit hard to wrap my head around. My hope is that if we first build a very simple
+implementation of a `vDOM` it is easier to understand when combining it with other concepts. 
+
 #### Quick recap
 
 In the previous sections we've learned some of the basics of the vDOM. 
@@ -45,11 +51,13 @@ and we only allow a `tag` and `className`.
 index.js
 
 //create a vElement
-function createVElement(tag, className) {
- return {
-   tag: tag,
-   className: className
- }
+function createVElement(tag, config) {
+  const { className } = config;
+
+  return {
+    tag: tag,
+    className: className
+  }
 }
 ```
  
@@ -63,19 +71,21 @@ let's call this method `mountVElement`, not very creative I know.
 index.js
 
 function mountVElement(vElement, DOM) {
-  const { className, tag } = vElement;
+  const { tag, className } = vElement;
   
   //create a native DOM node
   const domNode = document.createElement(tag);
+
   
   //for later reference save the DOM node
   //on our vElement
   vElement.dom = domNode;
-  
+
   //add className to native node
   if (className !== undefined) {
     domNode.className = className;
   }
+  
   
   //Append domNode to the DOM
   DOM.appendChild(domNode)
@@ -83,11 +93,13 @@ function mountVElement(vElement, DOM) {
 ```
  
 Now we have a function that allows use to mount our `VElement` in the DOM. 
-As you can see nothing is magical  is happening. The `vElement` is basicly a 
-blueprint for the `domNode`. Another thing to notice is that in the 
-`mountVElement` function we're altering the `domNode` by adding a className on it. In a later 
-iteration we will use this mounting phase to attach inline styles, click handlers etcetera. It's a 
-pretty important phase! 
+As you can see nothing is magical is happening. The `vElement` is basicly a 
+blueprint for the `domNode`. It's important to note that we attaching a native
+`node` to our `vElement` in the line: `vElement.dom = domNode;`. It's sort of like
+putting a beating heart in `vElement`. We will look at this in more detail later, but there
+is already a big hint, think a bit how we're adding a className to the `domNode`.
+
+ 
  
 ### Create our first app!
 
@@ -102,7 +114,7 @@ index.js
 //get native DOM, For now let's use the body;
 const root = document.body;
 //create vElement
-const myApp = createVElement('div', 'my-class');
+const myApp = createVElement('div', { className: 'my-class' });
 //mount in DOM
 
 mountVElement(myApp, root);
