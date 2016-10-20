@@ -1,8 +1,8 @@
 # Summary
 
 * [The Basics](01-basics/README.md)
-    * [The Virtual DOM](basics/01-virtual-dom.md)
-    * [Mounting](basics/02-mounting.md)
+    * [The Virtual DOM](01-basics/01-virtual-dom.md)
+    * [Mounting](01-basics/02-mounting.md)
 * [Building our own basic Virtual DOM](build_basic_vdom/README.md)
     * [Getting started](build_basic_vdom/01-getting-started.md)
     * [Recursivly build the DOM](02-building_basic_vdom/02-recursively-build-dom.md)
