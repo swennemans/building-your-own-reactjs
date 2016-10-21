@@ -25,18 +25,22 @@ const myApp = createVElement('div', {
 ```
 
 Now it's time to add some red and height in our app! Compared to our previous code we've omitted 
-the `className` property and added our styles. Thus, we have to update our `createVElement` function:
+the `className` property and added a style property. In order to handle this new property
+we need to update our `createVElement` function:
 
 ```javascript
 index.js
 ...
 //create a vElement
-function createVElement(tag, config) {
+function createVElement(tag, config, children = null) {
   const { className, style } = config;
 
   return {
     tag: tag,
     style: style,
+    props: {
+      children: children,
+    },
     className: className,
   }
 }
@@ -50,13 +54,17 @@ index.js
 
 ...
 
-function mountVElement(vElement, DOM) {
-  const { tag, className, style } = vElement;
+function mountVElement(vElement, parentDOMNode) {
+  const { tag, props, className, style } = vElement;
   
   const domNode = document.createElement(tag);
 
   vElement.dom = domNode;
-  
+
+  if (props.children) {
+    children.forEach(child => mountVElement(child, domNode));
+  }
+    
   if (className !== undefined) {
     domNode.className = className;
   }
@@ -64,14 +72,16 @@ function mountVElement(vElement, DOM) {
   //Iterate over the properties in the style
   //object. And add the property and it's value to our domNode. 
   if (style !== undefined) {
-    Object.keys(style).forEach((sKey) => domNode[sKey] = style[sKey]);
+    Object.keys(style).forEach((sKey) => domNode.style[sKey] = style[sKey]);
   }
   
-  DOM.appendChild(domNode)
+  parentDOMNode.appendChild(domNode)
 }
 ```
 
-Ofcourse the implementation is very naive. We skipping some important parts 
-like accounting for properties where an `-` is needed, like `background-color` and 
-for integer values where `px` should be added. But hey, we're still practicing!
+Ofcourse the implementation is very naive. We're skipping some important cases
+like accounting for properties where an `-` is needed (like `background-color`) and 
+handling integer values correctly. But hey, we're still practicing!
+
+
 

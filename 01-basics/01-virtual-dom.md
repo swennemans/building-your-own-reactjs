@@ -37,9 +37,7 @@ type VElement = {
   dom: ?Node,
 }
 
-type VText = {
-  text: string,
-  dom: ?Node,
+type VText = string || number,
 }
 
 ```

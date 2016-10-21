@@ -8,7 +8,7 @@
     * [Recursivly build the DOM](02-building_basic_vdom/02-recursively-build-dom.md)
     * [Inspecting our vDOM](02-building_basic_vdom/03-inspecting-our-vdom.md)
     * [Adding properties](02-building_basic_vdom/04-adding-props.md)
-    * Displaying text (coming soon)
+    * [Displaying text](02-building_basic_vdom/05-displaying-text.md)
     * Updating/patching (coming soon)
 * React.js (coming soon)
     *
