@@ -58,6 +58,8 @@ function mountVElement(vElement, parentDOMNode) {
   }
 
   parentDOMNode.appendChild(domNode);
+
+  return domNode;
 }
 ```
 

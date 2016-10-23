@@ -11,4 +11,5 @@
     * [Displaying text](02-building_basic_vdom/05-displaying-text.md)
     * [Mighty components](02-building_basic_vdom/06-mighty-components.md)
     * [The Component class](02-building_basic_vdom/07-component-class.md)
+    * [Adding state](02-building_basic_vdom/08-adding_state.md)
     * Updating/patching (coming soon)

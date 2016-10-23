@@ -75,7 +75,9 @@ function mountVElement(vElement, parentDOMNode) {
     Object.keys(style).forEach((sKey) => domNode.style[sKey] = style[sKey]);
   }
   
-  parentDOMNode.appendChild(domNode)
+  parentDOMNode.appendChild(domNode);
+
+  return domNode;
 }
 ```
 

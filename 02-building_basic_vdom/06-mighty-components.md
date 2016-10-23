@@ -3,7 +3,7 @@
 Till know we've kept a strict mapping between our `vDOM` and `DOM`, meaning we've used
 `vElements` and `vTexts`. Even though it's pretty cool that we can construct our UI this way, we 
 only created a static UI. How would we update our UI and keep state? The answer is `Components`.
-Components are like `vNodes` but then with superpowers! 
+Components are like `vNodes` but then with superpowers!  
 
 Well, sort of because you will see that **we** selectably define these extra powers. The practical difference
 with other `vNodes` is that instead of directly returning it's contents, we explicitly define a function, 
@@ -47,10 +47,11 @@ We're going to call this function, just as React does, `createElement`. Let add 
 ```javascript
 index.js
 
+
+
 ...
 
 function createElement(tag, config, children) {
-  
   // If the tag is a function. We have a component!
   // we will see later why. 
   if (typeof tag === 'function') {
