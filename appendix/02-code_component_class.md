@@ -1,4 +1,4 @@
-The working code in chapter Component class.
+The working code at the end of chapter [Component class](../02-building_basic_vdom/07-component-class.md)
 
 ```javascript
 index.js
@@ -44,7 +44,7 @@ function mountVComponent(vComponent, parentDOMNode) {
   
   // build a component instance. This uses the 
   // defined Component class. For brevity 
-  // call it ComponentClass. Not needed ofcourse;
+  // call it Component. Not needed ofcourse;
   const Component = tag;
   const instance = new Component(props);
 
@@ -126,6 +126,7 @@ class Component {
   render() {}
 }
 
+//Our app
 class App extends Component {
   render() {
     return createElement('div', { style: { height: '100px', background: 'red'} }, [

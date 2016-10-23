@@ -28,8 +28,8 @@ class Component {
 ```
 
 Exciting! We're going to implement the much used `setState` function ourselves! But, before
-we're going finish the `Component` implementation we will mount a `vComponent` first. We will definitly
-run into some problems, but these problems will let define the requirements for the `Component`!
+we're going finish the complete `Component` implementation we will we look at mounting first. 
+We will definitly run into some problems, but these problems will let define the requirements for the `Component`!
 
 ## Mounting a Component with `mountVComponent`.
 
@@ -69,6 +69,9 @@ function mountVComponent(vComponent, parentDOMNode) {
 }
 
 ```
+
+> React.js has a `mountComponent` function on it's ReactCompositeComponent or ReactDOMComponent
+for now we're seperating this.   
 
 The most important part is that we instantiate our `Component` with `new Component(props)`.
 This in turn gives us access to the `render()` function. The render function returns the 
@@ -113,7 +116,7 @@ mount(createElement(App, { message: 'Hello there!' }), root);
 ```
 
 > If the code is not working, or If I accidently skipped parts, please let me know. The
-code we *should* have at this point. can be found [here](appendix/02-code_component_class.md)
+code we *should* have at this point. can be found [here](../appendix/02-code_component_class.md)
 
 Awesome! We've now introduced components and can also pass props. But, we're not 
 utilizing the Components as we should, we introduced `Components` because we want a 

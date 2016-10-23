@@ -1,9 +1,9 @@
-# Mighty Components
+# The Mighty Component 🏋
 
 Till know we've kept a strict mapping between our `vDOM` and `DOM`, meaning we've used
-`vElements` and `vTexts`. Even though it's pretty cool that we can construct our UI this way, we 
-only created a static UI. How would we update our UI and keep state? The answer is `Components`.
-Components are like `vNodes` but then with superpowers!  
+`vElements` and `vTexts`. Even though it's pretty cool that we can construct our UI this way, we've
+kept it static. How would we update our UI and keep state? The answer is `Components`.
+Components are like `vNodes` but with superpowers!  
 
 Well, sort of because you will see that **we** selectably define these extra powers. The practical difference
 with other `vNodes` is that instead of directly returning it's contents, we explicitly define a function, 
@@ -16,8 +16,9 @@ work before and after we call `render()`. Hint: we're do you think the `lifecycl
 Just as any other `vElement` the (mighty) Component also needs to be created. We can define
 a `createVComponent` function. 
 
-> Please note that React.js does this a bit different, but this step will make you understand React.js 
-architecture better. We're gradually adding complexity. 
+> Please note that React.js does this differently. It has the concept
+of internal components. These types of components handle the 
+mounting, updating etc. 
 
 ```javascript
 index.js
@@ -46,9 +47,6 @@ We're going to call this function, just as React does, `createElement`. Let add 
 
 ```javascript
 index.js
-
-
-
 ...
 
 function createElement(tag, config, children) {
@@ -125,12 +123,13 @@ class App extends Component {
 Hopefully the `Class` keyword doesn't scare you. We will keep it simple! 
 
 > We *could* define it in one of the other ways JavaScript allows it, but we want to 
-keep the API close to React's one and above all keep it simple!
+keep the API close to React's one and, above all, keep it simple!
 
 
 ### Quick recap
 
-Till now we briefly discussed why we need a `Component` (dynamic UI's) and that we would like to instantiate it
-using the familiair React.js API. We've refactored our code so that it can call the appropriate function on creation. 
+Till now we briefly discussed why we need a `Component` and that we would like to instantiate it
+using it the same as in React.js. 
+ We've refactored our code so that it can call the appropriate function on creation. 
 
-However, we didn't discuss how our `Component class` looks like and how to mount it. Let's continue...
+However, we didn't discuss how our `Component class` looks like and how to mount it. Let's continue...🚂
