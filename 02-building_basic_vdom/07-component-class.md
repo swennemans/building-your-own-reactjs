@@ -13,9 +13,6 @@ class Component {
     this.props = props || {};
   }
 
-  updateComponent() {
-    // Awesome things to come
-  }
 
   setState(partialNewState) {
     // Awesome things to come
@@ -57,11 +54,6 @@ function mountVComponent(vComponent, parentDOMNode) {
   // handle that!
   const dom = mount(initialVNode, parentDOMNode);
 
-  // save the DOM reference!
-  vComponent.dom = dom;
-  // save the instance. 
-  vComponent._instance = instance;
-
   //append the DOM we've created.
   parentDOMNode.appendChild(dom);
 
@@ -70,8 +62,8 @@ function mountVComponent(vComponent, parentDOMNode) {
 
 ```
 
-> React.js has a `mountComponent` function on it's ReactCompositeComponent or ReactDOMComponent
-for now we're seperating this.   
+> React.js has a `mountComponent` function on it's ReactCompositeComponent or ReactDOMComponent. For
+illustration purposes we seperate it for now.  
 
 The most important part is that we instantiate our `Component` with `new Component(props)`.
 This in turn gives us access to the `render()` function. The render function returns the 
@@ -119,7 +111,7 @@ mount(createElement(App, { message: 'Hello there!' }), root);
 code we *should* have at this point. can be found [here](../appendix/02-code_component_class.md)
 
 Awesome! We've now introduced components and can also pass props. But, we're not 
-utilizing the Components as we should, we introduced `Components` because we want a 
-dynamic UI. Time to change that!
+utilizing the Components as we should, we introduced `Components`.
+
 
 

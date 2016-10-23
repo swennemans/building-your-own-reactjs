@@ -114,7 +114,7 @@ class App extends Component {
 
   render() {
     return (
-      createVElement('div', { className: 'foo'}, 'bar')
+      createVElement('div', { className: 'foo'}, `Message: ${this.state.message}`)
     );
   }
 }
@@ -128,8 +128,7 @@ keep the API close to React's one and, above all, keep it simple!
 
 ### Quick recap
 
-Till now we briefly discussed why we need a `Component` and that we would like to instantiate it
-using it the same as in React.js. 
+Till now we briefly discussed why we need a `Component` and why it is a *special* type. 
  We've refactored our code so that it can call the appropriate function on creation. 
 
 However, we didn't discuss how our `Component class` looks like and how to mount it. Let's continue...🚂
