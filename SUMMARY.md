@@ -10,9 +10,5 @@
     * [Adding properties](02-building_basic_vdom/04-adding-props.md)
     * [Displaying text](02-building_basic_vdom/05-displaying-text.md)
     * [Mighty components](02-building_basic_vdom/06-mighty-components.md)
-    * [The component class](02-building_basic_vdom/07-component-class.md)
+    * [The Component class](02-building_basic_vdom/07-component-class.md)
     * Updating/patching (coming soon)
-* React.js (coming soon)
-    *
-    *
-    *
