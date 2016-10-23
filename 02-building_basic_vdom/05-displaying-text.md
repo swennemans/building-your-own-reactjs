@@ -4,7 +4,7 @@ Now that we can actually add styles, the next step is to add some text. In the n
 a `textNode` is a different type than a `HTMLElement`, hence the different methods to create each. 
 In our `vDOM` we follow suit. 
 
-We can formally define a `vText` node as: `type VText = string || number`.
+A `vText` node is formally defined as: `type VText = string || number`.
 
 
 ## Organizing our code
@@ -54,7 +54,7 @@ function mountVElement(vElement, parentDOMNode) {
   }
   
   if (style !== undefined) {
-    Object.keys(style).forEach((sKey) => domNode.style[sKey] = style[sKey]);
+    Object.keys(style).forEach(sKey => domNode.style[sKey] = style[sKey]);
   }
 
   parentDOMNode.appendChild(domNode);
@@ -77,6 +77,10 @@ mount(myApp, root);
 ```
 
 You can see that we didn't define a `createVText` function. We *could* do it, but this would just return
-it's value (a string or a number). Also, it might look weird that we only need to change the textContent of it's
-parentDOMNode, but again this is recursion at work. The function will receive an h1 `node` and add text to it, f
-from `<h1></h1>` to `<h1>My Text</h1>`.
+it's value (a string or a number). 
+
+Also, it might look weird that we only need to change the textContent of it's
+parentDOMNode, but again this is recursion at work. The function will receive an h1 `node` and add text to it, first 
+we only have `<h1></h1>`, then in the next iteration: `<h1>My Text</h1>`. 
+
+Now

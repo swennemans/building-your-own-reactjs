@@ -76,7 +76,6 @@ function mountVElement(vElement, DOM) {
   //create a native DOM node
   const domNode = document.createElement(tag);
 
-  
   //for later reference save the DOM node
   //on our vElement
   vElement.dom = domNode;
