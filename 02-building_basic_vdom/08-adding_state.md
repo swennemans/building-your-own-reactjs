@@ -81,21 +81,21 @@ class Component {
   }
 
   updateComponent() {
-    const prevState = this.state;
-    const prevElement = this._currentElement;
+      const prevState = this.state;
+      const prevElement = this._currentElement;
 
-    if (this._pendingState !== prevState) {
-      this.state = this._pendingState;
+      if (this._pendingState !== prevState) {
+        this.state = this._pendingState;
+      }
+      //reset _pendingState
+      this._pendingState = null;
+      const nextElement = this.render();
+      this._currentElement = nextElement;
+
+      //get it in the native DOM
+      mount(nextElement, this._parentNode);
+
     }
-    //reset _pendingState
-    this._pendingState = null;
-    const nextElement = this.render();
-    this._currentElement = nextElement;
-
-    //get it in the native DOM
-    mount(nextElement, this._parentNode);
-
-  }
 
   setState(partialNewState) {
     // Awesome things to come
