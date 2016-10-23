@@ -1,14 +1,12 @@
 # Adding state!
 
-
-
 Okido, now it's getting exciting. We're going to add `state`! Woop Woop. 
 
 > In this section we're going to implement the option to update state. However, we will keep it
 extremely simple and with a lot of missing functionalities. The point is to give you an overal idea
 of how it *could* work. The goal of this series is to understand how React.js works. If we would fully
-implement state updates with corresponding patch/diff algorithms it would take too much time. You're 
-probably here because you want to learn more about React.js and not see my code :smile:
+implement state updates with corresponding patch/diff algorithms *here* it would take too much time. 
+You're here because you want to learn more about React.js and not see my code :smile:
 
 The public API for updating state , as you probably know, is: `this.setState(partialNewState)`. Of
 course we could naively implement the `setState` function as:
@@ -43,8 +41,7 @@ the state updates in the UI. Just how would we do that?
 
 > For now we leave **efficient** re-rendering for what it is. 
 
-Let's implement a very naive version:
-
+Let's implement a very naive version, to get a feeling for the solution. 
 
 ```javascript
 function mountVComponent(vComponent, parentDOMNode) {
