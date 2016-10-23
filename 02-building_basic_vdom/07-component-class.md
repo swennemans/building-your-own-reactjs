@@ -27,4 +27,9 @@ class Component {
 
 ```
 
-Exciting! We've 
+Exciting! We're going to implement the much used `setState` function ourselves! But, before
+we're going finish the `Component`, let's try to mount a `vComponent` first. We will definitly
+run into some problems, but these problems will let define the requirements for the `Component`!
+
+## Mounting a Component with `mountVComponent`.
+
