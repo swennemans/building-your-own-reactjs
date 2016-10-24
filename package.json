@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "gitbook-plugin-advanced-emoji": "^0.2.1"
+    "gitbook-plugin-advanced-emoji": "^0.2.1",
+    "gitbook-plugin-disqus": "^1.0.0"
   }
 }
