@@ -299,6 +299,38 @@ class NestedApp extends Component {
 
 # ANDDDDD there you go! Now we can build all efficient apps and shit! 👏👏
 
+I **really** hope you now have a better *conceptual* understanding how React
+and React-like libraries **could** work. I've tried to really seperate 
+all the different moving parts, so that the different concepts are *hopefully*
+easier to grasp. 
+
+We could even create a directory structure like:
+
+```javascript
+
+vComponent
+ - mount.js
+ - update.js
+ - create.js
+vElement
+ - mount.js
+ - update.js
+ - create.js
+vText
+- mount.js
+- update.js
+- create.js
+Component.js
+creating.js
+mounting.js
+updating.js
+```
+
+Next we will be diving into React.js, The seperation in the code is less clear. 
+Most responsbilities are put on the different `Components`. Making it harder
+to understand what is going one. Hopefully this can work as a reference.  
+
+#One ♥️
 
 
 
