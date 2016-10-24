@@ -287,7 +287,6 @@ class NestedApp extends Component {
 
   render() {
     console.log('OK IM RERENDERING!');
-
     return createElement('h1', { style: { color: '#'+Math.floor(Math.random()*16777215).toString(16) } }, [
       `The count from parent is: ${this.props.counter}`, 
       createElement('div', {}, `Some text ${this.props.counter}`)
@@ -330,7 +329,7 @@ Next we will be diving into React.js, The seperation in the code is less clear.
 Most responsbilities are put on the different `Components`. Making it harder
 to understand what is going one. Hopefully this can work as a reference.  
 
-#One ♥️
+#One 💖
 
 
 

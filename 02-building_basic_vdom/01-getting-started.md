@@ -1,20 +1,29 @@
-# Building our own Virtual DOM
+# Building our own React-like implementation
 
-In this section we will create our own Virtual DOM. However, this will be the most 
-simplified version there is :smile:. 
+In this section we will create our own React-like implementation. 
+However, it's is massively simplified. And stuff **will** break :smile:. 
 
 Please note that from now one we assume that we implement a `vDOM` in order to
 create a native `DOM`. Of course we can create a `vDOM` without mapping it to the native `DOM`
 but that would make it pretty useless. But it would be a waste of both our times to keep repeating
 this. 
 
-#### Why?
+### Why?
 
-React.js is pretty complex and I personally found the the whole `vDOM` implementation
-also a bit hard to wrap my head around. My hope is that if we first build a very simple
-implementation of a `vDOM` it is easier to understand when combining it with other concepts. 
+React.js has a pretty complex codebase. There a lots of thing that are
+difficult to wrap your head around. My hope is that if we first build a simple
+React-like implementation, it's going to be easier to understand when we're diving into React.js
 
-#### Quick recap
+If you don't need this, you're more then welcome to skip this part :). 
+
+### Credits
+
+I have massively peeked into the source code of 
+[Inferno.js](https://github.com/trueadm/inferno) and [Preact.js](https://preactjs.com/). If there
+is code that looks similair it probably is! Sorry about missing references. Both are 
+awesome libraries with beautiful code!
+
+### Quick recap
 
 In the previous sections we've learned some of the basics of the vDOM. 
 The vDOM is constructed out of `vNodes` and determines the shape of the DOM. The vDOM cannot be displayed by the browser directly, the vDOM must be **mounted**. 
@@ -25,7 +34,7 @@ In our first version we will create a vDOM with a whopping number of one node!
 We will the methods that will create, *mount* and render our `vElement`
 
 #### Getting started
-If you want to program along. I've prepared a simple project which 
+If you want to program along. I've prepared a simple dev starter which 
 you can clone from: `https://github.com/swennemans/building-react-js`. 
 
 After you've cloned the repo, you need to install the dependencies

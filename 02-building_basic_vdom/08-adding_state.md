@@ -100,7 +100,10 @@ class Component {
     }
 
   setState(partialNewState) {
-    // Awesome things to come
+    // I know this looks weired. Why don't pass state to updateComponent()
+    // function, I agree. 
+    // We're just getting a little familiair with putting data on instances. 
+    // seomthing that React uses heavily :)
     this._pendingState = Object.assign({}, this.state, partialNewState);
     this.updateComponent();
   }
