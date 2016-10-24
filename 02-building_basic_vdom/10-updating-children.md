@@ -135,15 +135,15 @@ that we're using an array.
   }
 ```
 
-And lets' try again!
+Let's try again!
 
-OOH YEAHHHH ITS TIME TO **PREMATURELY** CELEBRATE YOO.
+### OOH YEAHHHH ITS TIME TO **PREMATURELY** CELEBRATE YOO.
 
 ![](../appendix/disco.gif)
 
 
-We've **almost** made it. Everythang seems to work nicely. We can pass `Components` as child to other`Components` which is awesome! 
-It also renders the passed props. However, if the props are updated this is not represented in the UI. 
+We've **almost** made it. Everythang seems to work nicely. We can pass `Components` as children to other`Components` 
+which is awesome! It also renders the passed props. However, if the props are updated this is not represented in the UI. 
 
 If you look closely you will see that the render function of the `NestedApp` isn't called after the initial render. 
 We need to fix that!
