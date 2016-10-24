@@ -2,8 +2,8 @@
 
 In the last section we've manually edited our `vDOM` by manipulating a
 the attached `domNode`. 
- Of course in practice we would declare this properties beforehand. These properties
- could be among other things be: inline styles, classname(s) or events. Because this is
+ Of course in practice we would declare some of these properties beforehand. These properties
+ could be among other things be: inline styles, classname(s) and events. Because this is
 just our practice implementation we won't be implemeting all. We've already added classNames 
 and to keep it simple we will add inline styles :smile:
 
@@ -24,9 +24,9 @@ const myApp = createVElement('div', {
   ])
 ```
 
-Now it's time to add some red and height in our app! Compared to our previous code we've omitted 
-the `className` property and added a style property. In order to handle this new property
-we need to update our `createVElement` function:
+Nothing happenend. Let's fix this. 
+Compared to our previous app definition we've omitted the `className` property and added a style property. 
+In order to handle this new property we need to update our `createVElement` function:
 
 ```javascript
 index.js
@@ -42,12 +42,13 @@ function createVElement(tag, config, children = null) {
       children: children,
     },
     className: className,
+    dom: null,
   }
 }
 ```
 
-Easy-peasy. Of course we're adding inline styles for the native `domNode` so
-we have to attach it in the `mount` phase. Let's edit the `mountVElement` function. 
+Easy-peasy. Of course we're adding inline styles for the native `DOMNode` so
+we have to attach it in the **mount** phase. Let's edit the `mountVElement` function. 
 
 ```javascript
 index.js
@@ -62,7 +63,7 @@ function mountVElement(vElement, parentDOMNode) {
   vElement.dom = domNode;
 
   if (props.children) {
-    children.forEach(child => mountVElement(child, domNode));
+    props.children.forEach(child => mountVElement(child, domNode));
   }
     
   if (className !== undefined) {
@@ -81,9 +82,10 @@ function mountVElement(vElement, parentDOMNode) {
 }
 ```
 
-Ofcourse the implementation is very naive. We're skipping some important cases
+Of course the implementation is very naive. We're skipping some important cases
 like accounting for properties where an `-` is needed (like `background-color`) and 
 handling integer values correctly. But hey, we're still practicing!
 
+Now it's time to add some text!
 
 

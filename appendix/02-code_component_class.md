@@ -1,24 +1,27 @@
-The working code at the end of chapter [Component class](../02-building_basic_vdom/07-component-class.md)
+The working code at the end of chapter [Component class](../02-building_basic_vdom/10-updating-children.md)
 
 ```javascript
 index.js
-
-function createVElement(tag, config, children = null) {
-  const { style, className } = config;
-  return {
-    tag: tag,
-    props: {
-      children: children,
-    },
-    className: className,
-    style: style,
- }
-}
 
 function createVComponent(tag, props) {
   return {
     tag: tag,
     props: props,
+    dom: null,
+  }
+}
+
+function createVElement(tag, config, children = null) {
+  const { className, style } = config;
+
+  return {
+    tag: tag,
+    style: style,
+    props: {
+      children: children,
+    },
+    className: className,
+    dom: null,
   }
 }
 
@@ -39,37 +42,9 @@ function createElement(tag, config, children) {
   return vNode;
 }
 
-function mountVComponent(vComponent, parentDOMNode) {
-  const { tag, props } = vComponent;
-  
-  // build a component instance. This uses the 
-  // defined Component class. For brevity 
-  // call it Component. Not needed ofcourse;
-  const Component = tag;
-  const instance = new Component(props);
-
-  // The instance or Component has a render() function 
-  // that returns the user-defined vNode.
-  const initialVNode = instance.render();
-
-  // the initialVNode can be a vElement or a
-  // vComponent. mountVComponent doenst't care. Let the mount()
-  // handle that!
-  const dom = mount(initialVNode, parentDOMNode);
-
-  // save the DOM reference!
-  vComponent.dom = dom;
-  // save the instance. 
-  vComponent._instance = instance;
-
-  //append the DOM we've created.
-  parentDOMNode.appendChild(dom);
-}
-
-
 
 function mount(input, parentDOMNode) {
-  if (typeof input === 'string') {
+  if (typeof input === 'string' || typeof input === 'number') {
     //we have a vText
     return mountVText(input, parentDOMNode);
   } 
@@ -77,34 +52,63 @@ function mount(input, parentDOMNode) {
     //we have a component
     return mountVComponent(input, parentDOMNode);
   }
-  else {
+  // for brevity make an else if statement. An
+  // else would suffice. 
+  else if (typeof input.tag === 'string') {
+    
     //we have a vElement
     return mountVElement(input, parentDOMNode)
   }
 }
 
+function mountVComponent(vComponent, parentDOMNode) {
+  const { tag, props } = vComponent;
+  
+  // build a component instance. This uses the 
+  // defined Component class. For brevity 
+  // call it Component. Not needed ofcourse, new tag(props)
+  // would do the same. 
+  const Component = tag;
+  const instance = new Component(props);
+
+  // The instance or Component has a render() function 
+  // that returns the user-defined vNode.
+  const nextElement = instance.render();
+
+  // the nextElement can be a vElement or a
+  // vComponent. mountVComponent doenst't care. Let the mount()
+  // handle that!
+  const dom = mount(nextElement, parentDOMNode);
+  //append the DOM we've created.
+  parentDOMNode.appendChild(dom);
+
+  return dom;
+}
+
 function mountVText(vText, parentDOMNode) {
+  // Oeeh we received a vText with it's associated parentDOMNode.
+  // we can set it's textContent to the vText value. 
+  // https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent
   parentDOMNode.textContent = vText;
-  return vText;
 }
 
 function mountVElement(vElement, parentDOMNode) {
-  const { className, tag, style, props } = vElement;
+  const { className, tag, props, style } = vElement;
+
   const domNode = document.createElement(tag);
-
   vElement.dom = domNode;
-
   if (props.children) {
-     //we call our new function mount!
-     props.children.forEach((child) => mount(child, domNode));
+     // Oeh, we have children. Pass it back to our mount
+     // function and let it determine what type it is.
+     props.children.forEach(child => mount(child, domNode));
   }
-  
+
   if (className !== undefined) {
     domNode.className = className;
   }
   
   if (style !== undefined) {
-    Object.keys(style).forEach((sKey) => domNode.style[sKey] = style[sKey]);
+    Object.keys(style).forEach(sKey => domNode.style[sKey] = style[sKey]);
   }
 
   parentDOMNode.appendChild(domNode);
@@ -116,9 +120,6 @@ class Component {
   constructor(props) {
     this.props = props || {};
   }
-  updateComponent() {
-    // Awesome things to come
-  }
   setState(partialNewState) {
     // Awesome things to come
   }
@@ -126,7 +127,9 @@ class Component {
   render() {}
 }
 
-//Our app
+//get native DOM, For now let's use the body;
+const root = document.body;
+//create vElement
 class App extends Component {
   render() {
     return createElement('div', { style: { height: '100px', background: 'red'} }, [
@@ -135,7 +138,6 @@ class App extends Component {
   }
 }
 
-const root = document.body;
-
 mount(createElement(App, { message: 'Hello there!' }), root);
+
 ```

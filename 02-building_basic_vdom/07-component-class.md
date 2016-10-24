@@ -21,16 +21,20 @@ class Component {
 
 ```
 
-Exciting! We're going to implement the much used `setState` function ourselves! But, before
-we're going finish the complete `Component` implementation we will we look at mounting first. 
-We will definitly run into some problems, but these problems will let define the requirements for the `Component`!
+Exciting! We're going to implement the much used `setState` function ourselves! 
+But, before we're going finish the `Component class` implementation we will we look at mounting first. 
+We will definitly run into some problems, but these problems will 
+let us define the requirements for the `Component class` better!
 
 ## Mounting a Component with `mountVComponent`.
 
-As you probably could guess we're going to define this function as `mountVComponent`. And it does 
-a bit more work then the other mount functions. Let's see:
+As you probably could have guessed we're going to define 
+this function as `mountVComponent`. And it does a bit more work then 
+the other mount functions. Let's see:
 
 ```javascript
+index.js
+...
 
 function mountVComponent(vComponent, parentDOMNode) {
   const { tag, props } = vComponent;
@@ -44,12 +48,17 @@ function mountVComponent(vComponent, parentDOMNode) {
 
   // The instance or Component has a render() function 
   // that returns the user-defined vNode.
-  const initialVNode = instance.render();
+  const currentElement = instance.render();
 
-  // the initialVNode can be a vElement or a
+  // the currentElement can be a vElement or a
   // vComponent. mountVComponent doenst't care. Let the mount()
   // handle that!
-  const dom = mount(initialVNode, parentDOMNode);
+  const dom = mount(currentElement, parentDOMNode);
+
+  //save the instance for later
+  //references! 
+  vComponent._instance = instance;
+  vComponent.dom = dom;
 
   //append the DOM we've created.
   parentDOMNode.appendChild(dom);
@@ -59,19 +68,21 @@ function mountVComponent(vComponent, parentDOMNode) {
 
 ```
 
-> React.js has a `mountComponent` function on it's ReactCompositeComponent or ReactDOMComponent. For
-illustration purposes we seperate it for now.  
+> React.js has a `mountComponent` function on it's ReactCompositeComponent or ReactDOMComponent.
 
 The most important part is that we instantiate our `Component` with `new Component(props)`.
-This in turn gives us access to the `render()` function. The render function returns the 
-`vNodes` and we recurse again! **It's all about recursion yo!**
+This creates a `Component class`, that has a `render()` function. 
+The render function returns the `vNodes` and, we recurse again! 
+**It's all about recursion yo!**
 
 Now we need to update the `mount` function, so that it can handle `vComponents`. 
 
 ```javascript
+index.js
+...
 
 function mount(input, parentDOMNode) {
-  if (typeof input === 'string') {
+  if (typeof input === 'string' || typeof input === 'number') {
     //we have a vText
     return mountVText(input, parentDOMNode);
   } 
@@ -80,8 +91,8 @@ function mount(input, parentDOMNode) {
     return mountVComponent(input, parentDOMNode);
   }
   // for brevity make an else if statement. An
-  // else would suffice. 
-  else if (typeof input.tag === 'object') {
+  // else would suffice :). 
+  else if (typeof input.tag === 'string') {
     //we have a vElement
     return mountVElement(input, parentDOMNode)
   }
@@ -89,6 +100,7 @@ function mount(input, parentDOMNode) {
 ```
 
 And we can define and render our new application as: 
+
 ```javascript
 class App extends Component {
   render() {
@@ -107,10 +119,11 @@ mount(createElement(App, { message: 'Hello there!' }), root);
 > If the code is not working, or If I accidently skipped parts, please let me know. The
 code we *should* have at this point. can be found [here](../appendix/02-code_component_class.md)
 
-Awesome! We've now introduced components and can also pass props. But, we're not 
-utilizing the Components as we should, we introduced them for their powers.. 
+Awesome! We've now introduced `Components`!. We've built a `Component Class`
+which we can easily extend. We're making moves yoo!
+But, we're not  utilizing the Components as we should, we introduced them for their powers.. 
 
-Let's take a look at state.
+Let's take a look at **state**.
 
 
 

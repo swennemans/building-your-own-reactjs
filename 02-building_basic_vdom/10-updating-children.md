@@ -1,11 +1,13 @@
 # Children.. 🚸🚸
 
-Children are **very** important and at the same time troublemakers, just as in real life would my parenting friends say 👪. 
-React created a seperate class to handle them: `ReactMultiChildren`. But we don't need that in our lifes yet. 
-We're just practicing :smile:
+Children are **very** important and at the same time troublemakers, 
+just as in real life would my parenting friends say 👪. 
+React created a seperate class to handle them: `ReactMultiChildren`. 
+But we don't need that in our lifes yet. We're just practicing :smile:
 
-We know that our `children` live in `this.props.children`. Soooo, in our `updateVElement` function we can look for them. And 
-implement logic to handle those brats: 
+We know that our `children` live in `this.props.children`. 
+Soooo, in our `updateVElement` function we can identify them.  
+Now we just need to implement the logic to handle those troublemakers: 
 
 ```javascript
 index.js
@@ -18,7 +20,7 @@ function updateVElement(prevElement, nextElement) {
   if (nextElement.props.children) {
     updateChildren(prevElement.props.children, nextElement.props.children, dom);
   }
-
+  
   if (prevElement.style !== nextElement.style) {
     Object.keys(nextElement.style).forEach((s) => dom.style[s] = nextElement.style[s])
   }
@@ -55,12 +57,15 @@ function updateChildren(prevChildren, nextChildren, parentDOMNode) {
 
 ```
 
-We have an `updateChildren` function that is called when the current `vElement` has `children`. The `updateChildren` 
-is very naivly implemented. For example it doesn't take into account the possibility that `vNode` can be added or removed (the arrays
-would have different lenghts). But we won't worry about that. 
+We have an `updateChildren` function that is called when the current `vElement` has `children`. 
+The `updateChildren` is very naivly implemented. For example it doesn't take into account 
+the possibility that `vNode` can be added or removed (the arrays would have different lenghts). 
+But we won't worry about that. 
 
-We also take a quick shortcut to check if we're dealing with a `vText`. If so, we directly call the `updateVText` function. Of course it 
-would be nicer to call the `update` function directly to handle the different types, but *we aint got no time for that*. 
+We also take a quick shortcut to check if we're dealing with a `vText`. 
+If it's a `vText`, we directly call the `updateVText` function. Of course it 
+would be nicer to call the `update` function directly to handle the different types, 
+but that would request some refactoring, *we aint got no time for that*. 
 
 The only thing remaining to be implemented is the `updateVText` function:
 
@@ -97,7 +102,7 @@ class App extends Component {
     }
     setInterval(() => {
       this.setState({ counter: this.state.counter + 1 })
-    }, 2500);
+    }, 500);
   }
 
   render() {
@@ -113,41 +118,59 @@ class App extends Component {
 
 ```
 
+OOPS this doesn't seem to work. The error is: `children.forEach is not a function`.
+The dangers of iteration!
+
+The problem is that in our `mountVElement` function, `props.children` can be an array, but
+can also be a plain string. It is an easy fix. In our if statement we make sure 
+that we're using an array. 
+
+```javascript
+  if (props.children) {
+    if (!Array.isArray(props.children)) {
+      mount(props.children, domNode)
+    } else {
+      props.children.forEach(child => mount(child, domNode));
+    }
+  }
+```
+
+And lets' try again!
+
 OOH YEAHHHH ITS TIME TO **PREMATURELY** CELEBRATE YOO.
 
 ![](../appendix/disco.gif)
 
 
-We've **almost** made it. Everythang seems to work nicely. However, there is one thing left to implement. We can pass `Components` as child to other
-`Components` which is awesome! It also renders the passed props. However, if the props are updated this is not represented in the UI. 
+We've **almost** made it. Everythang seems to work nicely. We can pass `Components` as child to other`Components` which is awesome! 
+It also renders the passed props. However, if the props are updated this is not represented in the UI. 
 
-If you look closely you will see that the render function of the `NestedApp` isn't called after the initial render. We need to fix that!
+If you look closely you will see that the render function of the `NestedApp` isn't called after the initial render. 
+We need to fix that!
 
 ## Updating the mighty Components!
 
-As we've found out when we were writing the code for mounting `Components`, `Components` are behaving differently then our `vElements` and `vTexts`. And 
-that is a good thing because it creates all kinds of opportunities, but it **does** mean we have to think a little bit harder about the implementation
+As we've found out when we were writing the code for mounting `Components`, `Components` are behaving differently then our `vElements` and `vTexts`.
+That is a good thing because it creates all kinds of opportunities, but it **does** mean we have to think a little bit harder about the implementation
 of.... the `updateVComponent` function. 
 
-**What do we actually want?** Mentally, I like to split `Components` in two. The `render()` function
-and everything else. 
+**What do we actually want?** Mentally, I like to split `Components` in two, 1) the `render()` function and 2) everything else. 
 
-The eventual goal is to call the `update` function, with an `prevElement` and `nextElement`. The render function
-will give us the `nextElement`. The `prevElement` we can grab from `this._currentElement`, we were smart and saved
-this one on `mountVComponent` . Actually, better names would be: `nextRenderedElement` and `prevRenderedElement`, because
-it a results from calling `render()`.
+The eventual goal is to call the `update` function, with an `prevRenderedElement` and `nextRenderedElement`. The render function
+will give us the `nextRenderedElement`. The `prevElement` we can grab from `this._currentElement`, as we've already discussed. 
 
 However, before we're calling `render()` we can do some housekeeping. We swap the `_instance`, `dom` and `props` from our
-previous to next `vComponent`, and update the `_instance` property with the `_currentElement`. 
-
-**Then** we call `render()`, and call `update` with the `prevRenderedElement`and `nextRenderedElemen`. 
+previous to our next `vComponent`, and update the `_instance` property and its `_currentElement` property with the `nextRenderedElement`.
+ 
+**Then** we call `render()`, and call `update` with the `prevRenderedElement`and `nextRenderedElement` and let recursion
+do it's magic 🎉
 
 ```javascript
 index.js
 
 ...
 
-function updateVComponent(prevElement, nextElement) {
+function updateVComponent(prevComponent, nextComponent) {
   
   //get the instance. This is Component. It also 
   //holds the props and _currentElement; 
@@ -176,12 +199,39 @@ function updateVComponent(prevElement, nextElement) {
 ```
 
 Tell me about it, this can be massively confusing :smile: I would suggest to put some `debugger` statements
-between the different lines and see what is doing what. 
+between the different lines and see what is doing what. You **will** figure it out!
+
 Remember, we're doing a lot preparing for the next iteration and next and next and next... **Recursion is very
 important**!
 
 > 💡 If we would refactor our `updateComponent` function on our Component class, we could
 reuse logic here. 
+
+We just need to adjust one small thing. We need to adjust our `update` function so that it can call the
+`updateVComponent` function when needed.
+
+```javascript
+index.js
+...
+
+function update(prevElement, nextElement) {
+  //Implement the first assumption!
+  if (prevElement.tag === nextElement.tag) {
+    //Inspect the type. If the `tag` is a string
+    //we have a `vElement`. (we should actually
+    //made some helper functions for this ;))
+    if (typeof prevElement.tag === 'string') {
+      updateVElement(prevElement, nextElement);
+    } else if (typeof prevElement.tag === 'function') {
+      updateVComponent(prevElement, nextElement);
+    }
+  } else {
+    //Oh oh two elements of different types. We don't want to 
+    //look further in the tree! We need to replace it!
+  }
+}
+
+```
 
 Time to take our new code for a testdrive. Let's redefine our new application:
 
@@ -235,7 +285,7 @@ mount(createElement(App), root);
 ## ShouldComponentUpdate?
 
 We haven't really discussed lifecycle methods yet. But at this stage it would be nice to add the `shouldComponentUpdate`
-lifecylce method. 
+lifecycle method. 
 
 We need to update our `Component class` a bit, so that it will return true as default: 
 
@@ -297,6 +347,9 @@ class NestedApp extends Component {
 ```
 
 # ANDDDDD there you go! Now we can build all efficient apps and shit! 👏👏
+
+> If the code is not working, or If I accidently skipped parts, please let me know. The
+code we *should* have at this point. can be found [here](../appendix/02-code_complete_10.md)
 
 I **really** hope you now have a better *conceptual* understanding how React
 and React-like libraries **could** work. I've tried to really seperate 

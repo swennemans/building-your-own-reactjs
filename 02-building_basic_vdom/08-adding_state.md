@@ -1,15 +1,17 @@
 # Adding state!
 
-Okido, now it's getting exciting. We're going to add `state`! Woop Woop. 
+Okido, now it's getting exciting. We're going to add `state`! Woop Woop 🚨🚨🚨
 
 > In this section we're going to implement the option to update state. However, we will keep it
-extremely simple and with a lot of missing functionalities. The point is to give you an overal idea
+extremely simple and with lots of missing functionalities. The point is to give you an overal idea
 of how it *could* work. The goal of this series is to understand how React.js works. If we would fully
 implement state updates with corresponding patch/diff algorithms *here* it would take too much time. 
 You're here because you want to learn more about React.js and not see my code :smile:
 
-The public API for updating state in React, as you probably know, is: `this.setState(partialNewState)`.
-We could naively and wrongly implement the `setState` function as:
+
+OK then, sorry for the small intervention. The public API for updating state in React, 
+as you probably know, is: `this.setState(partialNewState)`. We could naively and wrongly 
+implement the `setState` function as:
 
 ```javascript
 class Component {
@@ -33,34 +35,41 @@ class Component {
 
 ```
 
-Technically we're updating the local state, but that isn't enough is it? We want to reflect
+Technically we're updating the local state, but that isn't enought, bummer! We want to reflect
 the state updates in the UI.
 
 ## What does it even mean 🤔?
 
-Let's stop and think about the what we're trying to accomplish. Our main goal is to reflect
-the state updates in the UI. Just how would we do that?
+Our main goal is to reflect the state updates in the UI. Just how would we do that?
 
 > For now we leave **efficient** re-rendering for what it is. 
 
 Let's implement another naive version and learn some things along the way:
 
 ```javascript
+index.js
+...
+
 function mountVComponent(vComponent, parentDOMNode) {
   const { tag, props } = vComponent;
 
   const Component = tag;
   const instance = new Component(props);
 
-  const currentElement = instance.render();
+  const nextRenderedElement = instance.render();
   //create a reference of our currenElement
   //on our component instance.
-  instance._currentElement = initialVNode;
+  instance._currentElement = nextRenderedElement;
   //create a reference to the passed
   //DOMNode. We might need it.
   instance._parentNode = parentDOMNode; 
 
-  const dom = mount(currentElement, parentDOMNode);
+
+  const dom = mount(nextRenderedElement, parentDOMNode);
+  
+  //save the instance for later references.
+  vComponent._instance = instance;
+  vComponent.dom = dom;
 
   parentDOMNode.appendChild(dom);
 }
@@ -71,6 +80,9 @@ And update the `Component class`:
 
 
 ```javascript
+index.js
+
+...
 
 class Component {
   constructor(props) {
@@ -91,11 +103,11 @@ class Component {
       }
       //reset _pendingState
       this._pendingState = null;
-      const nextElement = this.render();
-      this._currentElement = nextElement;
+      const nextRenderedElement = this.render();
+      this._currentElement = nextRenderedElement;
 
       //get it in the native DOM
-      mount(nextElement, this._parentNode);
+      mount(nextRenderedElement, this._parentNode);
 
     }
 
@@ -112,12 +124,17 @@ class Component {
 }
 ```
 
-Let's take a look at the new `updateComponent()` function. If needed we update the local state. Then we will call
-the `render()` function to retrieve the `vNodes`. The `vNodes` may or may not been affected by the state change. We
-now have a `nextElement` and `prevElement`.
+Let's take a look at the new `updateComponent()` function. 
+If the state is updated, we update the local state. Then we will call the `render()` function to retrieve 
+the `nextRenderedElement`. This element consists of one or more `vNode(s)` and may or not 
+may not been affected by the state change. 
+We now have a `nextRenderedElement` and `prevRenderedElement`. We've nameed them like this. because it are the
+results of calling `render()`.  
 
-Both of these element's are `vNodes` and we know which shapes they can have. For learning purposes we 
-call the `mount` function with our `newElement`.
+Both of these elements are a `vNode` and we know which shapes they can have. 
+
+For learning purposes we call the `mount` function with our `nextRenderedElement`. Let's see
+what happens!
 
 
 ```javascript

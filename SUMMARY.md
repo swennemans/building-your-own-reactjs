@@ -17,3 +17,4 @@
 * React (coming soon)
 * Appendix
     * [CODE: 02-Component class](appendix/02-code_component_class.md)
+    * [CODE: 02-Updating children](appendix/02-code_complete_10.md)

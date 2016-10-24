@@ -8,7 +8,7 @@ names it's stuff so we can impress people at parties with our knowledge of priva
 If you have found any screw-ups, errors and/or inconsistencies please be so kind to report them by opening
 an issue, contact me at: [@swennemans](https://twitter.com/swennemanns) or posting a comment. 
 
-I hope you will learn something from it!
+Also feedback would greatly appreciated. Where do I go to slow, where to fast etc. 
 
 ### Work in progress :smile:
 
