@@ -5,7 +5,7 @@ to implement an `update` function that updates the UI accordingly.
 Again, it's a simplified version that **most definitly** will break when you try hard enough (probably even 
 with not trying hard :smile: )
 
-# A extremely expensive problem!
+# An extremely expensive problem!
 
 In [React's docs](https://facebook.github.io/react/docs/reconciliation.html) it is mentioned that updating 
 the UI efficiently, by comparing trees, is an O(n3) problem. Where `n` is the number of elements in the tree. 
@@ -154,7 +154,7 @@ for `style` changes (we're not removing old styles (yet)). If the style has chan
 
 ### Time to disco 💃🎉💃
 
-We can redefine our application to see if things are working as expected: 
+Let's redefine our application to see if things are working as expected: 
 
 ```javascript
 class App extends Component {
@@ -182,9 +182,12 @@ mount(createElement(App), root);
 
 ```
 
-Is it working?? **YES** and **NO**. Yes our application is updating the height as expected, and we could even make it a disco by lowering the interval. Pretty awesome!
+Is it working?? **YES** and **NO**. Yes our application is updating the height as we wanted and we could even make it a disco by lowering the interval. 
+Pretty awesome 🕶
 
 **BUT** our text is not updating... why is that?
 
-Well, we don't handle the `children` yet. 
+Well, the text is defined in the `vElement` as a `child` and we don't handle the `children` yet. 
+
+
 

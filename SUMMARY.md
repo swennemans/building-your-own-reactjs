@@ -13,6 +13,7 @@
     * [The Component class](02-building_basic_vdom/07-component-class.md)
     * [Adding state](02-building_basic_vdom/08-adding_state.md)
     * [Updating](02-building_basic_vdom/09-updating.md)
+    * [Updating children](02-building_basic_vdom/10-updating-children.md)
 * React (coming soon)
 * Appendix
     * [CODE: 02-Component class](appendix/02-code_component_class.md)

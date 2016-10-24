@@ -6,8 +6,9 @@ I try to keep the naming of the different elements closely to how React.js
 names it's stuff so we can impress people at parties with our knowledge of private methods and shit.  
 
 If you have found any screw-ups, errors and/or inconsistencies please be so kind to report them by opening
-an issue or contact me at: [@swennemans](https://twitter.com/swennemanns)
-I hope you can learn something from it!
+an issue, contact me at: [@swennemans](https://twitter.com/swennemanns) or posting a comment. 
+
+I hope you will learn something from it!
 
 ### Work in progress :smile:
 

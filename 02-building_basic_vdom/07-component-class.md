@@ -12,12 +12,9 @@ class Component {
   constructor(props) {
     this.props = props || {};
   }
-
-
   setState(partialNewState) {
     // Awesome things to come
   }
-
   //will be overridden
   render() {}
 }
@@ -111,7 +108,9 @@ mount(createElement(App, { message: 'Hello there!' }), root);
 code we *should* have at this point. can be found [here](../appendix/02-code_component_class.md)
 
 Awesome! We've now introduced components and can also pass props. But, we're not 
-utilizing the Components as we should, we introduced `Components`.
+utilizing the Components as we should, we introduced them for their powers.. 
+
+Let's take a look at state.
 
 
 

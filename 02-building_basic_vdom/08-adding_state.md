@@ -8,8 +8,8 @@ of how it *could* work. The goal of this series is to understand how React.js wo
 implement state updates with corresponding patch/diff algorithms *here* it would take too much time. 
 You're here because you want to learn more about React.js and not see my code :smile:
 
-The public API for updating state , as you probably know, is: `this.setState(partialNewState)`. Of
-course we could naively implement the `setState` function as:
+The public API for updating state in React, as you probably know, is: `this.setState(partialNewState)`.
+We could naively and wrongly implement the `setState` function as:
 
 ```javascript
 class Component {
@@ -30,9 +30,11 @@ class Component {
   //will be overridden
   render() {}
 }
+
 ```
 
-Technically we're updating the state, but there will be no updates shown in the UI. Bummer 😞
+Technically we're updating the local state, but that isn't enough is it? We want to reflect
+the state updates in the UI.
 
 ## What does it even mean 🤔?
 
@@ -41,7 +43,7 @@ the state updates in the UI. Just how would we do that?
 
 > For now we leave **efficient** re-rendering for what it is. 
 
-Let's implement a very naive version, to get a feeling for the solution. 
+Let's implement another naive version and learn some things along the way:
 
 ```javascript
 function mountVComponent(vComponent, parentDOMNode) {
@@ -138,6 +140,4 @@ class App extends Component {
 
 
 What do you think that will happen? Yes, we have an updating UI **but** but the updates are just appended to 
-the exsting DOM, this creates a long list... **Not** exactly what we're looking for!
-
-
+the exsting DOM, this creates a long list... **NOT** exactly what we're looking for!
